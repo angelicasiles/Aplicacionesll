@@ -109,7 +109,7 @@ const Index = () => {
 
         <ScrollView style={{marginTop: 8}}>
           {data.map(item => (
-            <View style={style_01.tarjeta} key={item.codigo}>
+            <View style={style_01.tarjeta} key={item.Signo}>
               <Text>Signo: {item.Signo}</Text>
               <Text>Dias: {item.Dias}</Text>
               <Text>Elemento: {item.Elemento}</Text>
