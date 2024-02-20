@@ -1,122 +1,41 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import {Image, ScrollView, Text, View} from 'react-native';
-import {style_01} from '../styles/style_01';
-
-const data = [
-  {
-    Signo: 'Acuario',
-    Dias: 'Ene/20 - Feb/18',
-    Elemento: 'Aire',
-    Astro: 'Urano',
-    Piedra: 'Turquoise',
-    Imagen: '09_Libra.jpg',
-  },
-  {
-    Signo: 'Piscis',
-    Dias: 'Feb/19 - Mar/20',
-    Elemento: 'Agua',
-    Astro: 'Neptuno',
-    Piedra: 'Ametyst',
-  },
-  {
-    Signo: 'Aries ',
-    Dias: 'Mar/21 - Abr/19',
-    Elemento: 'Fuego',
-    Astro: 'Marte',
-    Piedra: 'Heliotrope',
-  },
-  {
-    Signo: 'Tauro',
-    Dias: 'Abr/20 - May/20',
-    Elemento: 'Tierra',
-    Astro: 'Venus',
-    Piedra: 'Quarz',
-  },
-  {
-    Signo: 'Geminis',
-    Dias: 'May/21 - Jun/20',
-    Elemento: 'Aire',
-    Astro: 'Mercurio',
-    Piedra: 'Agate',
-  },
-  {
-    Signo: 'Cancer',
-    Dias: 'Jun/21 - Jul/22',
-    Elemento: 'Agua',
-    Astro: 'Luna',
-    Piedra: 'Aventurine',
-  },
-  {
-    Signo: 'Leo',
-    Dias: 'Jul/23 - Ago/22',
-    Elemento: 'Fuego',
-    Astro: 'Sol',
-    Piedra: 'Honey Agate',
-  },
-  {
-    Signo: 'Virgo',
-    Dias: 'Ago/23 - Sep/22',
-    Elemento: 'Tierra',
-    Astro: 'Mercurio',
-    Piedra: 'Carnelian',
-  },
-  {
-    Signo: 'Libra',
-    Dias: 'Sep/23 - Oct/22',
-    Elemento: 'Aire',
-    Astro: 'Venus',
-    Piedra: 'Japer',
-  },
-  {
-    Signo: 'Escorpio',
-    Dias: 'Oct/23 - Nov/21',
-    Elemento: 'Agua',
-    Astro: 'Urano',
-    Piedra: 'Chrysoprase',
-  },
-  {
-    Signo: 'Sagitario',
-    Dias: 'Nov/22 - Dic/21',
-    Elemento: 'Fuego',
-    Astro: 'Jupiter',
-    Piedra: 'Blue Agate',
-  },
-  {
-    Signo: 'Capricornio',
-    Dias: 'Dic/22 - Ene/19',
-    Elemento: 'Tierra',
-    Astro: 'Saturno',
-    Piedra: 'Blue Quartz',
-  },
-];
+import React, { useState, useEffect } from 'react';
+import { Image, ScrollView, Text, View } from 'react-native';
+import { style_01 } from '../styles/style_01';
 
 const Index = () => {
+  const [pokemons, setPokemons] = useState([]);
+
+  useEffect(() => {
+    fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=151')
+      .then(response => response.json())
+      .then(data => setPokemons(data.results));
+  }, []);
+
   return (
     <View>
       <View style={style_01.divHeader}>
-        <Image source={require('../imgs/logos/logo_universidad.png')} />
+        <Image source={require('../imgs/logoPM.png')} />
       </View>
 
       <View style={style_01.divMain}>
-        <Text style={style_01.h1}>SIGNOS ZODIACALES</Text>
-        <Text style={style_01.p1}>
-        En la astrología occidental, los signos zodiacales o signos astrológicos,
-        son los doce sectores de treinta grados de la eclíptica desde el equinoccio
-        vernal, una de las intersecciones con la elíptica con el ecuador celeste,
-        también conocido como Punto Aries.
-        </Text>
+        <Text style={style_01.h1}>First Generation</Text>
 
-        <ScrollView style={{marginTop: 8}}>
-          {data.map(item => (
-            <View style={style_01.tarjeta} key={item.Signo}>
-              <Text>Signo: {item.Signo}</Text>
-              <Text>Dias: {item.Dias}</Text>
-              <Text>Elemento: {item.Elemento}</Text>
-              <Text>Astro: {item.Astro}</Text>
-              <Text>Piedra: {item.Piedra}</Text>
+        <ScrollView style={{ marginTop: 8 }}>
+          {pokemons.map(item => (
+            <View style={style_01.tarjeta} key={item.name}>
+              <Text style = {{}}>{item.name}</Text>
+              <Image
+                source={{ uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${item.name}.png`}}
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={{
+                  width: 150,
+                  height: 100,
+                  alignSelf: 'left',
+                  marginTop: 1,
+                }}
+              />
             </View>
-            
           ))}
         </ScrollView>
       </View>
