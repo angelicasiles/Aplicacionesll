@@ -8,6 +8,9 @@ const principal = '#1B2E66';
 const naranja = '#FF9900';
 const blanco = '#FFFFFF';
 const gris_1 = '#B2BDD5';
+const gris_2 = '#e9e9e9';
+const lila = '#f7f0f9';
+
 
 // crea la hoja de estilos
 export const style_01 = StyleSheet.create({
@@ -16,10 +19,14 @@ export const style_01 = StyleSheet.create({
     flexDirection: 'column',
   },
   divHeader: {
-    backgroundColor: principal,
+    backgroundColor: gris_2,
+    display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    height: 80,
+    justifyContent: 'center', // Centra horizontalmente
+    alignItems: 'center', // Centra verticalmente
+    height: 150,
+    
   },
   divMain: {
     backgroundColor: gris_1,
@@ -65,9 +72,19 @@ export const style_01 = StyleSheet.create({
     fontSize: 12,
   },
   tarjeta: {
-    backgroundColor: blanco,
+    backgroundColor: lila,
     borderRadius: 10,
     margin: 5,
-    padding: 10,
+    padding: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 400, // Ancho de la tarjeta ajustado
+    height: 100, // Alto de la tarjeta ajustado
   },
+  name:{
+    top:50,
+    fontWeight: 'bold',
+  },
+
+  
 });
