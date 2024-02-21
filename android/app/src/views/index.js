@@ -1,16 +1,21 @@
-/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { style_01 } from '../styles/style_01';
 
 const Index = () => {
   const [pokemons, setPokemons] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=151')
       .then(response => response.json())
       .then(data => setPokemons(data.results));
   }, []);
+
+  const handlePokemonPress = (pokemonName) => {
+    navigation.navigate('PokemonDetails', { pokemonName });
+  };
 
   return (
     <View>
@@ -23,11 +28,14 @@ const Index = () => {
 
         <ScrollView style={{ marginTop: 8 }}>
           {pokemons.map(item => (
-            <View style={style_01.tarjeta} key={item.name}>
-              <Text style = {style_01.name}>{item.name}</Text>
+            <TouchableOpacity
+              style={style_01.tarjeta}
+              key={item.name}
+              onPress={() => handlePokemonPress(item.name)}
+            >
+              <Text style={style_01.name}>{item.name}</Text>
               <Image
-                source={{ uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${item.name}.png`}}
-                // eslint-disable-next-line react-native/no-inline-styles
+                source={{ uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${item.name}.png` }}
                 style={{
                   width: 125,
                   height: 100,
@@ -35,16 +43,9 @@ const Index = () => {
                   marginTop: 1,
                 }}
               />
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
-      </View>
-
-      <View style={style_01.divFooter}>
-        <Text style={style_01.textFooter}>
-          Carrera de Tecnologías de Información
-        </Text>
-        <Text style={style_01.textFooter}>Sede del Pacífico</Text>
       </View>
     </View>
   );

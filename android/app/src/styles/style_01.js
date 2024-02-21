@@ -7,9 +7,9 @@ const alto = Dimensions.get('window').height - 150;
 const principal = '#1B2E66';
 const naranja = '#FF9900';
 const blanco = '#FFFFFF';
-const gris_1 = '#B2BDD5';
+const gris_1 = '#717171';
 const gris_2 = '#e9e9e9';
-const lila = '#f7f0f9';
+const lila = '#dcddef';
 
 
 // crea la hoja de estilos
@@ -29,7 +29,7 @@ export const style_01 = StyleSheet.create({
     
   },
   divMain: {
-    backgroundColor: gris_1,
+    backgroundColor: gris_2,
     height: alto,
     padding: 8,
   },
@@ -45,11 +45,13 @@ export const style_01 = StyleSheet.create({
     fontWeight: '300',
   },
   h1: {
-    color: principal,
-    marginTop: 5,
-    marginBottom: 5,
-    fontSize: 24,
-    fontWeight: 'bold',
+      color: gris_1,
+      marginTop: 5,
+      marginBottom: 5,
+      fontSize: 24,
+      textAlign: 'center', // Centrar el texto horizontalmente
+      alignItems: 'center', // Centrar el texto verticalmente
+    
   },
   h2: {
     color: principal,
